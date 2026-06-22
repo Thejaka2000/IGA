@@ -11,7 +11,6 @@ def recoverKnotSpans(CRs):
 
     knot_spans = numpy.empty((p + 1, p + 1), dtype="f8")
 
-    # First knot span [0,1]
     knot_spans[:, 0] = 0.0
     knot_spans[:, -1] = 1.0
 
