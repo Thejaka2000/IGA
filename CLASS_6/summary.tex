@@ -1,0 +1,146 @@
+% Created: Jul, 25, 2026 15:11:56 by Thejaka Jayasinghe
+\documentclass[dvipdfmx,11pt,a4paper,uplatex]{jsarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=20truemm]{geometry}
+\usepackage[hyphens]{url}
+\usepackage{listings,jvlisting}
+\lstset{
+  basicstyle={\ttfamily},
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
+
+% For Tikz
+% \usepackage[margin=0cm, bottom=0cm, footskip=0cm]{geometry}
+% \usepackage{tikz}
+% \usetikzlibrary{positioning,shapes,shapes.symbols,patterns,arrows}
+% \usetikzlibrary{decorations.pathreplacing}
+% \usetikzlibrary{calc}
+% \pagestyle{empty}
+
+% include packages
+% \input{hyperref_jp}
+% \input{cleveref_jp}
+% \input{dec_math}
+% \input{dec_text}
+% \input{dec_smikawa}
+% \input{siunitx_jp}
+
+\title{}
+\author{}
+
+\begin{document}
+\maketitle
+\section{IGA 06: Order Reduction, Knot Removal and Least-Squares Projection}
+
+This lecture introduces techniques for reducing the complexity of B-spline and Bézier representations while preserving the geometry as accurately as possible.
+
+\subsection{Order Reduction}
+
+Order reduction approximates a Bézier or B-spline curve of higher degree by a lower-degree curve.
+
+Given a Bézier curve of degree $p_1$
+
+\[
+\mathbf{C}(u)=\sum_{i=0}^{p_1} B_i^{p_1}(u)\mathbf{P}_i,
+\]
+
+the objective is to approximate it by a curve of degree $p_2$, where
+
+\[
+p_2 < p_1.
+\]
+
+The reduced curve is
+
+\[
+\tilde{\mathbf{C}}(u)=
+\sum_{i=0}^{p_2}
+B_i^{p_2}(u)\mathbf{Q}_i,
+\]
+
+where the new control points $\mathbf{Q}_i$ minimize the approximation error.
+
+Order reduction decreases the computational cost but introduces approximation errors because the original curve cannot generally be represented exactly with a lower polynomial degree.
+
+\bigskip
+
+\subsection{Knot Removal}
+
+Knot removal reduces the number of knot spans by deleting unnecessary knots while maintaining the shape of the curve as closely as possible.
+
+Removing knots
+
+\begin{itemize}
+\item decreases the number of elements,
+\item reduces the number of control points,
+\item simplifies the spline representation.
+\end{itemize}
+
+Since an exact representation is generally impossible after removing knots, the new control points are computed to minimize the geometric error.
+
+Increasing the polynomial order before knot removal can improve the approximation quality.
+
+\bigskip
+
+\subsection{Least-Squares Projection}
+
+Least-squares projection computes the best approximation of one spline space onto another by minimizing the squared error.
+
+The approximation error is defined as
+
+\[
+E=
+\int_{\Omega}
+\left|
+\mathbf{C}(u)-\tilde{\mathbf{C}}(u)
+\right|^2du.
+\]
+
+The optimal control points satisfy the least-squares problem
+
+\[
+\min_{\mathbf{Q}} E.
+\]
+
+Compared with direct order reduction or knot removal, least-squares projection generally provides a more accurate approximation because it minimizes the global error over the entire curve.
+
+\bigskip
+
+\subsection{Key Points}
+
+\begin{itemize}
+\item \textbf{Order Reduction:} Lower polynomial degree with minimum approximation error.
+\item \textbf{Knot Removal:} Fewer knot spans and control points while preserving the geometry.
+\item \textbf{Order Elevation + Knot Removal:} Increasing the polynomial degree before removing knots often produces a better approximation.
+\item \textbf{Least-Squares Projection:} Provides the optimal approximation by minimizing the global squared error.
+\end{itemize}
+
+\bigskip
+
+\subsection{Practice Exercises}
+
+The lecture demonstrates the following numerical procedures:
+
+\begin{enumerate}
+\item Approximate a cubic Bézier curve using a quadratic Bézier curve.
+\item Approximate the same curve using a two-element quadratic B-spline.
+\item Remove knots from a quadratic B-spline and compare the resulting geometry.
+\item Perform order elevation followed by knot removal.
+\item Compare direct approximation with least-squares projection.
+\end{enumerate}
+\end{document}
