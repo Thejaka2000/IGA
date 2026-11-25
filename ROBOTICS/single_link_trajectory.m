@@ -23,15 +23,15 @@ fprintf('Position at end of 1st blend = %.4f deg\n', th0 + 0.5*alp*tb^2);
 th_l = zeros(size(t)); w_l = zeros(size(t)); a_l = zeros(size(t));
 for k = 1:numel(t)
     tk = t(k);
-    if tk <= tb                          % 1st parabolic blend
+    if tk <= tb                       
         th_l(k) = th0 + 0.5*alp*tk^2;
         w_l(k)  = alp*tk;
         a_l(k)  = alp;
-    elseif tk <= tf - tb                 % linear segment
+    elseif tk <= tf - tb                 
         th_l(k) = th0 + 0.5*alp*tb^2 + w*(tk - tb);
         w_l(k)  = w;
         a_l(k)  = 0;
-    else                                 % 2nd parabolic blend
+    else                                 
         th_l(k) = thf - 0.5*alp*(tf - tk)^2;
         w_l(k)  = alp*(tf - tk);
         a_l(k)  = -alp;
