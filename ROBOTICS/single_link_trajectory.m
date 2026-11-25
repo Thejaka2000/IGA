@@ -46,7 +46,7 @@ subplot(3,1,3); plot(t, a_l, 'k', 'LineWidth', 1.5); grid on;
 ylabel('\alpha [deg/s^2]'); xlabel('Time [s]');
 
 %% Cubic trajectory
-% theta(t) = a0 + a1 t + a2 t^2 + a3 t^3, with zero start/end velocity
+% theta(t) = a0 + a1 t + a2 t^2 + a3 t^3, with zero start & end velocity
 a0 = th0;
 a1 = 0;
 a2 =  3*D/tf^2;
