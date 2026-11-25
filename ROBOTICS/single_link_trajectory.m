@@ -9,10 +9,9 @@ D   = thf - th0;   % total displacement = 85 deg
 t = linspace(0, tf, 1000);
 
 %% Linear trajectory with parabolic blends 
-% Free design choice: blend time tb (must satisfy 0 < tb <= tf/2).
-tb  = 1;                      % blend time [s]
-w   = D/(tf - tb);            % constant cruise velocity [deg/s]
-alp = w/tb;                   % blend acceleration       [deg/s^2]
+tb  = 1;                      
+w   = D/(tf - tb);           
+alp = w/tb;                   
 
 fprintf('--- LSPB parameters ---\n');
 fprintf('Blend time          tb    = %.4f s\n', tb);
